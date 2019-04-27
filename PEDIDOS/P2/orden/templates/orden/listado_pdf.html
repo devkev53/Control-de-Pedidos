@@ -1,0 +1,45 @@
+{% extends "easy_pdf/base.html" %}
+{% load static %}
+{% block content %}
+<style> @page{size: legal landscape; margin: 2cm;} td{text-align: center;} a.kp{text-decoration: none; color: black; font-weight: normal;} table{font-size: 12px; border-style: solid; border-color: black; width: 100%;} th, td {width: 25%; text-align: center; padding-top: 4px;} th{background-color: #818181; color: white;}</style>
+        <h2 class="">
+          Pedidos
+        </h2>
+          <table>
+              <thead>
+                <tr>
+                  <th scope="col"># Pedido</th>
+                  <th scope="col">Cliente</th>
+                  <th scope="col">Fecha de Ingreso</th>
+                  <th scope="col">Pago</th>
+                  <th scope="col">Tipo de Pago</th>
+                  <th scope="col">Consumo</th>
+                  <th scope="col">Pendiente</th>
+                </tr>
+              </thead>
+              <tbody>
+                <style>a.kp{text-decoration: none; color: black; font-weight: normal;}p.neg{color: #FF611B;}p.pos{color: #35C426;}</style>
+                {% for pedido in pedido %}
+                <tr>
+                  <td scope="row">
+                    <a class="kp" href="#">
+                      ORDER-N{{ pedido.id}}
+                    </a>
+                  </td>
+                  <td>{{pedido.cliente}}</td>
+                  <td>{{pedido.create}}</td>
+                  <td>{{pedido.pago}}</td>
+                  <td>{{pedido.recoge_tipo_pago}}</td>
+                  <td><b>Q. {{pedido.total}}</b></td>
+                  <td class="pendiente"><b>
+                    {% if pedido.saldo_pendiente <= 0 %}
+                      <p class=""> ---------- </p>
+                    {% else %}
+                      <p class="neg">Q. {{pedido.saldo_pendiente}}</p>
+                    {% endif %}</b>
+                  </td>
+              {% endfor %}
+        </div>
+      </div>
+    </div>
+{% endblock %}

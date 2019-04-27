@@ -1,0 +1,126 @@
+{% load static %}
+<script type="text/javascript" src={% static "ckeditor/ckeditor-init.js" %}></script>
+<script type="text/javascript" src={% static "ckeditor/ckeditor/ckeditor.js" %}></script>
+<link href={% static "core/ccs/custom_ckeditor.css" %} rel="stylesheet">
+{% if request.user.is_active %}
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+  <div class="container">
+    <img src={% static "core/img/XD.png" %} width="30" height="30" class="d-inline-block align-top" alt="">
+    <span class="navbar-brand" href="#"><i><b>
+      &nbsp; Administrador de Pedidos</b></i>
+    </span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nep" aria-controls="nep" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse float-right" id="nep">
+
+    <!-- Pedidos -->
+      <div class="dropdown">
+        <a class="text-dark btn btn-secondary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="" aria-expanded="">
+          <b>
+            <img src={% static "core/img/dev.png" %} width="30">
+            Pedidos
+          </b>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href='{% url 'crear_pedido' %}'>
+            <i class="fa fa-plus-square text-success"></i>
+            Nuevo Pedido
+          </a>
+          <a class="dropdown-item" href='{% url 'Plist' %}'>
+            <i class="fa fa-list-alt text-primary"></i>
+            Ver Pedidos
+          </a>
+        </div>
+      </div>
+    <!-- Clientes -->
+      <div class="dropdown">
+        <a class="text-dark btn btn-secondary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="" aria-expanded="">
+          <b>
+            <img src={% static "core/img/cl.png" %} width="30">
+            Clientes
+          </b>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href={% url 'Ccreate' %}>
+            <i class="fa fa-plus-square text-success"></i>
+            Nuevo Cliente
+          </a>
+          <a class="dropdown-item" href={% url 'Clist' %}>
+            <i class="fa fa-list-alt text-primary"></i>
+            Listado Clientes
+          </a>
+        </div>
+      </div>
+    {% if request.path == '/producto/listado/' %}
+    <style>a.prod>b{}</style>
+    {% else %}
+    {% endif%}
+    <!-- Productos -->
+      <div class="dropdown prdo">
+        <a class="text-dark btn btn-secondary prod" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="" aria-expanded="">
+          <b>
+            <img src={% static "core/img/pd.png" %} width="30">
+            Productos
+          </b>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href={% url 'create' %}>
+            <i class="fa fa-plus-square text-success"></i>
+            Nuevo Producto
+          </a>
+          <a class="dropdown-item" href={% url 'list' %}>
+            <i class="fa fa-list-alt text-primary"></i>
+            Ver Productos
+          </a>
+        </div>
+      </div>
+      <!-- Entregas -->
+      <div class="dropdown">
+        <a class="text-dark btn btn-secondary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="" aria-expanded="">
+          <b>
+            <img src={% static "core/img/Camion.png" %} width="30" height="22">
+            Despachos
+          </b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href={% url 'despacho' %}>
+            <i class="fa fa-list-alt text-primary"></i>
+            Ver Despachos
+          </a>
+        </div>
+    </div>
+      <!-- Reportes -->
+      <div class="dropdown">
+        <a class="text-dark btn btn-secondary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="" aria-expanded="">
+          <b>
+            <img src={% static "core/img/reporte1.png" %} width="30">
+            Reportes
+          </b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item text-danger" href={% url 'moras' %} target="blank">
+            <i class="fa fa-user-circle text-danger"></i>
+            Clientes en Mora
+          </a>
+          <a class="dropdown-item text-warning" href={% url 'entregas' %} target="_bank">
+            <img src={% static "core/img/Camion.png" %} width="25" alt="">
+            Entregas de Hoy
+          </a>
+        </div>
+      </div>
+        <ul class="navbar-nav flex-row ml-md-auto d-none- d-md-flex">
+          <li class="nav text-dark float-right">
+          <strong><a class="nav-item text-dark float-right" href={% url 'logout' %}>
+            <i class="fa fa-power-off"></i>
+            Salir
+          </a></strong>
+          </li>
+        </ul>
+    </div>
+  </div>
+</nav>
+{% endif %}

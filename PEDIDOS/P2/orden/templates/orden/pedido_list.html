@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Pedidos{% endblock %}
+{% block content %}
+    <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-12 mx-auto mb-5">
+        <h1 align="center">
+          <img src={% static "core/img/dev.png" %} width="75">
+          Pedidos
+        </h1>
+        <div class="row">
+          <div class="">
+          </div>
+          <style>a.text-white{text-decoration: none;} button.btn-kp{border-color: red;}</style>
+          <div class="flex-row ml-md-auto ">
+            <button type="button" class="btn btn-success ">
+              <b>
+                <a class="text-white" href={% url 'despacho' %} target="">Ir a Despachos</a></b>
+            </button>
+            <button type="button" class="btn btn-warning btn-kp">
+              <b>
+                <a class="text-white" href={% url 'pdflist' %} target="_blank">Imprimir Listado</a></b>
+            </button>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col"># Pedido</th>
+                  <th scope="col">Cliente</th>
+                  <th scope="col">Fecha de Pedido</th>
+                  <th scope="col">Abono</th>
+                  <th scope="col">Tipo de Pago</th>
+                  <th scope="col">Consumo</th>
+                  <th scope="col">Descuento</th>
+                  <th scope="col">Pendiente</th>
+                  <th scope="col">Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <style>a.kp{text-decoration: none; color: black; font-weight: normal;}p.neg{color: #FF611B;}p.pos{color: #35C426;} th.kp{font-size: 14px;} td.kp{font-size: 14px;}</style>
+                {% for pedido in pedido_list%}
+                <tr>
+                  <th scope="row" class="kp">
+                    <a class="kp" href="#">
+                      ORDER-N{{ pedido.id}}
+                    </a>
+                  </th>
+                  <td class="kp">{{pedido.cliente}}</td>
+                  <td class="kp">{{pedido.create}}</td>
+                  <td class="kp">{{pedido.pago}}</td>
+                  <td class="kp">{{pedido.recoge_tipo_pago}}</td>
+                  <td class="kp"><b>Q. {{pedido.recoge_total}}</b></td>
+                  <td class="kp"><b>Q. {{pedido.descuento}}</b></td>
+                  <td class="pendiente kp"><b>
+                    {% if pedido.saldo_pendiente <= 0 %}
+                      <p class=""> ---------- </p>
+                    {% else %}
+                      <p class="neg">Q. {{pedido.saldo_pendiente}}</p>
+                    {% endif %}</b>
+                  </td>
+                  <td>
+                    <button type="button" class="text-decoration-none btn btn-sm btn-outline-info">
+                      {{pedido.listado}}
+                    </button>
+                  </td>
+                </tr>
+              {% endfor %}
+        </div>
+      </div>
+    </div>
+{% endblock %}

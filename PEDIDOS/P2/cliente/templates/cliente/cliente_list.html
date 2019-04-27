@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Clientes{% endblock %}
+{% block content %}
+<style>.profile-avatar{float:left;width:4rem;height:4rem}.profile-data{padding-left:4.5rem;padding-top:.4rem;} table>tbody>tr>td{font-size: 14px;}</style>
+          <div class="mt-4 mb-3">
+            <h3 align="center">
+              <img src={% static "core/img/cliente.jpg" %} width="75">
+              Clientes
+            </h2>
+          </div>
+          <div class="row col 10">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">NIT</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Cuenta</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for cliente in cliente_list%}
+                  <tr>
+                    <td scope="row">{{ forloop.counter }}</td>
+                    <td><a class="kp" href="{% url  'Cupdate' cliente.pk %}">{{cliente.nombre}} {{cliente.apellido}}</a></td>
+                    <td>{{cliente.nit}}</td>
+                    <td>{{cliente.direccion}}</td>
+                    <td>
+                      {% if cliente.telefono %}
+                        {{cliente.telefono}}
+                      {% else %}
+                        N/A
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if   cliente.email %}
+                          {{cliente.email}}
+                      {% else %}
+                          <a href="{% url  'Cupdate' cliente.pk %}">Agregar Correo</a>
+                    {% endif %}
+                    </td>
+                    <td>{{cliente.tipo}}</td>
+                    <td>{{cliente.cuenta.saldo}}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+          </div>
+<!-- Menú de paginación -->
+        {% if is_paginated %}
+          <nav aria-label="Page navigation">
+            <ul class="pag pagination justify-content-center" style="background:white">
+              {% if page_obj.has_previous %}
+                <li class="page-item ">
+                  <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+                </li>
+              {% endif %}
+              {% for i in paginator.page_range %}
+                <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+                  <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                </li>
+              {% endfor %}
+              {% if page_obj.has_next %}
+                <li class="page-item ">
+                  <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">&raquo;</a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+        {% endif %}
+{% endblock %}

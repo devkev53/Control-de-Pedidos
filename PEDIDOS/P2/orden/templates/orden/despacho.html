@@ -1,0 +1,97 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+<!-- Estilos -->
+<style>a.kp{text-decoration: none; color: black;} p.pos{color: green;} p.neg{color: #FF510D}
+div.title-tab{background: #6A6A6A; padding-bottom: 1px; margin-top: 1px}</style>
+  <div class="container" align="center">
+    <div>
+      <br>
+      <h1>
+        <img src={% static "core/img/Camion.png" %} width="100" alt="">
+        Despacho
+      </h1>
+      <br>
+    </div>
+    <!-- DIV de la tabla -->
+    <div class="row">
+      <caption><h4 class="text-warning">Pendientes</h4></caption>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"># Pedido</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Fecha de Pedido</th>
+            <th scope="col">Estado</th> 
+          </tr>
+        </thead>
+        <tbody>
+        {% for pedido in pedido%}
+        {% if pedido.entrega >= today %}
+        {% if pedido.finalizado == False %}
+          <tr>
+            <th scope="row" class="kp">
+              <a class="kp" href=#>
+              ORDER-N{{ pedido.id}}
+              </a>
+            </th>
+            <td class="kp">{{pedido.cliente}}</td>
+            <td class="kp">{{pedido.create}}</td>
+            <td>
+              {% if pedido.finalizado == True %}
+                <a class="kp" href=>
+                <img src={% static "core/img/ck.png" %} width="30" align="center" alt="">
+                </a>
+              {% else %}
+                  <img src={% static "core/img/pend.png" %} width="30" align="center" alt="">
+              {% endif %}
+            </td>
+          </tr>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        </tbody>
+      </table>
+      <!-- Despachados -->
+      <caption><h4 class="text-success">Despachados</h4></caption>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"># Pedido</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Fecha de Pedido</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for pedido in pedido%}
+        {% if pedido.finalizado == True %}
+          <tr>
+            <th scope="row" class="kp">
+              <a class="kp" href=#>
+              ORDER-N{{ pedido.id}}
+              </a>
+            </th>
+            <td class="kp">{{pedido.cliente}}</td>
+            <td class="kp">{{pedido.create}}</td>
+            <td>
+              {% if pedido.finalizado == True %}
+                <a class="kp" href=#>
+                <img src={% static "core/img/ck.png" %} width="30" align="center" alt="">
+                </a>
+              {% else %}
+                <a class="kp" href=#>
+                <img src={% static "core/img/pend.png" %} width="30" align="center" alt="">
+                </a>
+              {% endif %}
+            </td>
+          </tr> 
+        {% endif %}
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+  <br>
+{% endblock content %}

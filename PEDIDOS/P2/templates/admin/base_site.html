@@ -1,0 +1,24 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+<!--Cambiando el color de la cabecera con el bloque extrastyle-->
+{% block extrastyle %}
+    <style>
+        #header{background: rgb(46, 46, 46);}
+        div.breadcrumbs {background: rgb(26, 26, 36);}
+        .module h2, .module caption, .inline-group h2 {background-color: #8D8C8C;}
+        a:link, a:visited {color: black; font-family: Comic Sans MS;}
+         .button, input[type=submit], input[type=button], .submit-row input, a.button {background-color: rgb(76, 76, 76);}
+         ul.messagelist li {background: #EFB8FF}
+    </style>
+{% endblock extrastyle %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <img src={% static "logoadmin.png" %} height="45" alt="">
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

@@ -1,0 +1,51 @@
+{% block content %}
+<style>tr.tabla{font-size: 4; text-align: center;} td{text-align: center;} table{font-size: 10px; border-style: solid; border-color: black; width: 100%;} th, td{width: 25%; text-align: center; padding-top: 4px;} th{background-color: #818181; color: white;} td.total{font-size: 12px; background-color: #DBDBDB} p.pendiente{color: red;}</style>
+    <h4>Fecha de Pedido: {{pedido.create}}</h4>
+    <h2>ORDER-N{{pedido.id}}</h2>
+    <div class="row">
+        <div>
+            <h3>Cliente: {{pedido.cliente}}</h3>
+            Abono: {% if pedido.abono <= 0.0 %}
+                Ninguno
+            {% else %}
+                {{pedido.abono}}
+            {% endif %}
+        </div>
+    </div>
+    Impresion de Boleta: {% now "SHORT_DATETIME_FORMAT" %}
+        <table>
+            <thead>
+                <tr class="tabla">
+                    <th>Articulo</th>
+                    <th>Precio</th>
+                    <th>Descuento</th>
+                    <th>Abono</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for items in items  %}
+                <tr>
+                    <td>{{items.producto}}</td>
+                    <td>{{items.producto.precio}}</td>
+                    <td>- {{pedido.descuento}}</td>
+                    <td>- {{pedido.abono}}</td>
+                    <td>{{items.cantidad}}</td>
+                    <td>{{items.subtotal}}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td class="total" colspan="5"><b>Total</b></td>
+                    <td class="total"><u>{{pedido.total}}</u></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <h3>Pendiente de Canelar: {% if pedido.saldo_pendiente > 0 %}
+                <p class="pendiente">{{pedido.saldo_pendiente}}</p>
+            {% else %}
+                {{pedido.saldo_pendiente}}
+            {% endif %}</h3>
+        </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+        <div class="container">
+            <style>table{font-size: 12px; border-color: black; border-width: 3px;}th{border-style: solid; border-width: 1px; padding-top: 3px; padding-bottom: -1px; background-color: #767676; color: white;} td{border-style: solid; border-width: 1px; padding-top: 2px; padding-bottom: -2px; white-space: nowrap;}</style>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Identificador</th>
+                        <th style="width:350px">Nombre</th>
+                        <th>NIT</th>
+                        <th style="width:300px">Correo</th>
+                        <th>Telefono</th>
+                        <th>Direccion</th>
+                        <th>Saldo A Pagar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in cliente  %}
+                    {% if cliente.cuenta.saldo < 0 %}
+                    <tr>
+                        <td align="center">CL-00{{cliente.id}}</td>
+                        <td align="center">{{cliente.nombre}} {{cliente.apellido}}</td>
+                        <td align="center">{{cliente.nit}}</td>
+                        <td align="center">
+                            {% if not cliente.email %}
+                                N/A
+                            {% else %}
+                                {{cliente.email}}
+                            {% endif %}
+                        </td>
+                        <td align="center">
+                            {% if not cliente.telefono %}
+                                N/A
+                            {% else %}
+                                {{cliente.telefono}}
+                            {% endif %}
+                        </td>
+                        <td align="center">{{cliente.direccion}}</td>
+                        <td align="center" style="color:#FF5A00">Q. {{cliente.cuenta.saldo}}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    <hr>

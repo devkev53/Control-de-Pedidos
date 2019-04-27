@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'core/css/mis_estilos.css' %}" rel="stylesheet">
+</head>
+<body>
+    <!-- Image and text -->
+    <nav class="navbar navbar-light bg-dark">
+      <a class="navbar-brand" href="#">
+        <img src={% static "core/img/BITS.png" %} width="100">
+        Bootstrap
+      </a>
+    </nav>
+    <!-- Contenido -->
+    {% include 'core/includes/submenu.html' %}
+    {% block content %}{% endblock %}
+    <!-- Javascript -->
+      <script src="{% static 'core/vendor/jquery/jquery.min.js' %}"></script>
+      <script src="{% static 'core/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'core/js/main.js' %}"></script>
+</body>
+</html>

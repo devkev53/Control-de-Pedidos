@@ -1,0 +1,32 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div style="padding-top:15px; text-align:center;">
+    {% if 'Cliente/ok' in request.GET %}
+        <b><p style='color:green'>Cliente registrado correctamente</p></b>
+    {% endif %}
+    <img src={% static "core/img/logoumg2.png" %} width="100">
+    <h2>2do Proyecto</h2>
+    <h1>Ingenieria de Software</h1>
+    <h3>Control de Pedidos</h3>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            Kevin Alberto Palma Ralda
+        </li>
+        <li class="nav-item">
+            Jose Manuel Mata Chinchilla
+        </li>
+        <li class="nav-item">
+            Carlos Edmundo Agustin
+        </li>
+        <li class="nav-item">
+            Cristian Obed Cardona Damaso
+        </li>
+    </ul>
+  </div>
+</div>
+<div align="center">
+    
+</div>
+{% endblock content %}

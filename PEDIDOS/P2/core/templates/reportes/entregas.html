@@ -1,0 +1,30 @@
+<style>table{font-size: 12px; border-color: black; border-width: 3px;}th{border-style: solid; border-width: 1px; padding-top: 3px; padding-bottom: -1px; background-color: #767676; color: white;} td{border-style: solid; border-width: 1px; padding-top: 2px; padding-bottom: -2px; white-space: nowrap;}</style>
+<h1><b>Entregas a realizarse el dia de hoy:</b> {% now "SHORT_DATETIME_FORMAT" %}</h1>
+<hr>
+<table>
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    {% for producto in producto  %}
+        <tbody>
+        <tr>
+            <td align="center">{{producto.nombre}}</td>
+            <td align="center">
+                {% for item in item %}
+                {% if item.producto.id == producto.id %}
+                {% if item.Pedido.entrega == today %}
+                {% if item.Pedido.finalizado == False %}
+                    {{item.cantidad}}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+            </td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+<hr>
